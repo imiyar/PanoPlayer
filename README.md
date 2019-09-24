@@ -2,7 +2,7 @@
 
 A [video.js](http://videojs.com/) plugin for playing 360 panoramic video.
 
-See a panoramic video demo and test the PanoPlayer plugin API [here](https://imiyar.github.io/PanoPlayer/index.html).
+See a panoramic video demo and test the PanoPlayer plugin API [here]().
 
 ## Notes
 
@@ -112,7 +112,6 @@ Method|Description|Parameter|Return
 `autoBackToDefault()`|Return whether the auto-back functionality is enabled|/|Boolean
 `autoBackToDefault(bool)`|Enable or disable the auto-back functionality|Boolean|PanoPlayer instance
 `isDefaultPosition()`|Return whether the camera is at the default position|/|Boolean
-`backToDefault()`|Let the camera back to the default position|/|PanoPlayer instance
 `dispose()`|Dispose the PanoPlayer plugin. Remove all customized components, event listeners and classes|/|/
 
 ### Events
