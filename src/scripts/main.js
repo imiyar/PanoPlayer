@@ -295,11 +295,6 @@ class PanoPlayer extends Plugin {
     return this;
   }
 
-  backToDefault() {
-    this.returnButton.return = true;
-    return this;
-  }
-
   isDefaultPosition() {
     return this.panoCanvas.lat === this.panoCanvas.defaultLat
       && this.panoCanvas.lon === this.panoCanvas.defaultLon
