@@ -2,7 +2,7 @@
 
 A [video.js](http://videojs.com/) plugin for playing 360 panoramic video.
 
-See a panoramic video demo and test the PanoPlayer plugin API [here]().
+See a panoramic video demo and test the PanoPlayer plugin API [here](https://imiyar.github.io/PanoPlayer/index.html).
 
 ## Notes
 
