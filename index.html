@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>PanoPlayer Demo</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="./node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="./dist/panoplayer.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <div class="row my-3">
+      <div class="col">
+        <h2>PanoPlayer Demo</h2>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col">
+        <p>PanoPlayer is a <a href="https://videojs.com">video.js</a> plugin for playing 360 panoramic video.</p>
+        <p><span class="font-weight-bold">Drag and drop</span> the video to view in full 360 degrees. <span class="font-weight-bold">Scroll/Pinch</span> to zoom in and out.</p>
+      </div>
+    </div>
+    <div class="row border-bottom py-3">
+      <div class="col-lg-8 my-3">
+        <video id='panoplayer' class='video-js vjs-fill' controls preload='auto' style="min-height: 400px">
+          <source src='./assets/Cafe.mp4' type='video/mp4'>
+        </video>
+      </div>
+      <div class="col-lg-4 my-3">
+        <div class="row border-bottom">
+          <div class="col">
+            <p class="font-weight-bold">PanoPlayer API</p>
+            <p>Current longitude: <span id="lon"></span></p>
+            <p>Current latitude: <span id="lat"></span></p>
+            <p>Current field-of-view: <span id="fov"></span></p>
+            <p>
+              <span>Default longitude: </span>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lon: 0 }).backToDefault()">0</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lon: 90 }).backToDefault()">90</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lon: 180 }).backToDefault()">180</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lon: 270 }).backToDefault()">270</button>
+            </p>
+            <p>
+              <span>Default latitude: </span>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lat: -45 }).backToDefault()">-45</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lat: 0 }).backToDefault()">0</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ lat: 45 }).backToDefault()">45</button>
+            </p>
+            <p>
+              <span>Default field-of-view: </span>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ fov: 50 }).backToDefault()">50</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ fov: 75 }).backToDefault()">75</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="panoPlayer.default({ fov: 100 }).backToDefault()">100</button>
+            </p>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <p class="font-weight-bold small">Desktop</p>
+            <p class="small">
+              If you move the curser out of the video frame, the camera will automatically return to the default position (can be disabled by scripts). Clicking the <span style="font-family: iconfont">&#xeaf6;</span> button on the video control bar can also make the camera return to the default position.
+            </p>
+            <p class="font-weight-bold small">Mobile</p>
+            <p class="small">
+              Camera will not auto-return to the default position.You can still click the <span style="font-family: iconfont">&#xeaf6;</span> button on the video control bar to return to the default camera position.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="row my-3">
+        <div class="col small text-center text-secondary">
+          <p class="my-0">This plugin is created by Chang LIU.</p>
+          <p><a href="">View Source</a></p>
+        </div>
+      </footer>
+  </div>
+
+  <script src='./node_modules/video.js/dist/video.min.js'></script>
+  <script src='./node_modules/three/build/three.min.js'></script>
+  <script src="./dist/panoplayer.min.js"></script>
+
+  <script>
+    var player = videojs('panoplayer');
+    var panoPlayer = null;
+
+    function updateDOMInnerHTML() {
+      const current = panoPlayer.current();
+      document.getElementById('lat').innerHTML = current.lat.toFixed(2);
+      document.getElementById('lon').innerHTML = current.lon.toFixed(2);
+      document.getElementById('fov').innerHTML = current.fov.toFixed(2);
+    }
+
+    player.on('ready', function() {
+      player.one('play', updateDOMInnerHTML);
+      panoPlayer = player.panoPlayer({
+        initLat: 0,
+        initLon: 180
+      });
+      panoPlayer.ready(function() {
+        panoPlayer.on('camerapositionchange', updateDOMInnerHTML)
+      })
+    });
+
+
+  </script>
+</body>
+</html>
