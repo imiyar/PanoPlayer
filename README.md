@@ -139,7 +139,7 @@ panoPlayer.on('camerapositionchange', function() {
 });
 
 // Set the default longitude to 180 and get back to the default position immediately.
-panoPlayer.default({ lon: 180 }).backToDefault();
+panoPlayer.default({ lon: 180 });
 
 // Disable auto-back functionality and set current camera position.
 panoPlayer.autoBackToDefault(false).current({lat: 90, lon: 90, fov: 100})
