@@ -24,7 +24,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
-    "three": "^0.107.0",
+    "three": "^0.125.0",
     "video.js": "^7.6.0"
   }
 }
